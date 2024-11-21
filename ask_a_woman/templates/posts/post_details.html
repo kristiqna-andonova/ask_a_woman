@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% load static %}
+{% block content %}
+    {% include 'posts/base_post.html'  %}
+    
+     <div class="comments-section">
+        <h2 class="comments-title">Comments</h2>
+     
+       <div class="comment-form">
+    <form method="post" action="{% url 'comment-functionality' post.id %}">
+        {% csrf_token %}
+        <div class="comment-input-container">
+            <!-- Textarea without visible borders -->
+            {{ comment_form.text|add_class:"comment-input" }}
+            <!-- Submit button positioned to the right -->
+            <button type="submit" class="comment-submit-btn">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </form>
+</div>
+        {% for comment in comments %}
+            
+            <div class="comments">
+                <div class="top">
+                    <div class="userDetails">
+                        <div class="profilepic">
+                            <div class="profile_img">
+                                <div class="image">
+                                    <!-- User Profile Image -->
+                                    {% if comment.user.profile.profile_img %}
+                                        <img src="{{ comment.user.profile.profile_img.url }}" alt="Profile Picture">
+                                    {% else %}
+                                        <img src="{% static 'images/img_1.png' %}" alt="Default Profile Picture">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment-data">
+                            <p>
+                                <!-- Link to User's Profile -->
+                                <a href="{% url 'profile-details' comment.user.pk %}">
+                                    {{ comment.user.username }}
+                                </a>
+                                <!-- Comment Text -->
+                                <br>
+                                {{ comment.text }}
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Comment Timestamp -->
+                    <span>{{ comment.date_time_of_publication|date:"M d, Y H:i" }}</span>
+                </div>
+            </div>
+            
+        {% empty %}
+            <p style="text-align: center">No comments yet. Be the first to comment!</p>
+        {% endfor %}
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>Update Profile</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Profile Information -->
+            <div>
+                <h3>Personal Information</h3>
+
+                <!-- Username Field -->
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">Username</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <ul class="error-list">
+                            {% for error in form.username.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">Email</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <ul class="error-list">
+                            {% for error in form.email.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+            {{ profile_form }}
+{#            <div class="form-group">#}
+{#                <label for="id_profile_img" class="file-upload-label">Choose Profile Photo</label>#}
+{#                {{ profile_form.profile_img }}#}
+{#                {% if profile_form.profile_img.errors %}#}
+{#                    <ul class="error-list">#}
+{#                        {% for error in profile_form.profile_img.errors %}#}
+{#                            <li>{{ error }}</li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
+{#                {% endif %}#}
+{#            </div>#}
+
+
+            <div>
+                <a href="{% url 'change-password' %}">Do you want to change your password?</a>
+            </div>
+
+            <!-- Password Change Section -->
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+    </div>
+
+{% endblock %}

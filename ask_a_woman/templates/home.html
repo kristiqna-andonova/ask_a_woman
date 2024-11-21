@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% for post in posts %}
+        <a href="{% url 'post-details' pk=post.pk %}" style="text-decoration: none; color: inherit;">
+        {% include 'posts/base_post.html' %}
+        </a>
+    {% endfor %}
+{% endblock %}

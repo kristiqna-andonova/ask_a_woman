@@ -1,0 +1,67 @@
+{% load static %}
+    <div class="post-div" role="alert">
+    <div class="post-header">
+        {% if post.author.profile.profile_img %}
+            <img src="{{ post.author.profile.profile_img.url }}" width="50" height="50" class="post-img" alt="{{ post.author.username }}">
+            {% else %}
+            <img src="{% static 'images/img_1.png' %}" width="50" height="50" class="post-img" alt="{{ post.author.username }}">
+        {% endif %}
+
+        <h2 class="post-title">{{ post.title }} ({{ post.type }})</h2>
+        <form method="post" action="{% url 'bookmark-functionality' pk=post.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="bookmark-btn">
+            {% if post.has_bookmarked %}
+                <i class="fa-solid fa-bookmark"></i> 
+            {% else %}
+                <i class="fa-regular fa-bookmark"></i> 
+            {% endif %}
+        </button>
+    </form>
+    </div>
+    <div class="post-content">
+        {{ post.description|truncatewords:100 }}
+    </div>
+    <div class="post-created">
+        {{ post.created_at|date:"m/d/Y" }}
+    </div>
+
+    <!-- Like and Author Section -->
+    <div class="like-author-container">
+        <span class="heart">
+
+            <a href="{% url 'like' post.pk %}">
+                {% if post.has_liked %}
+                    <i class="fa-solid fa-heart" style="color: red"></i> <!-- Heart icon when liked -->
+                {% else %}
+                    <i class="fa fa-heart-o" style="color: red"></i> <!-- Empty heart when unliked -->
+                {% endif %}
+            </a>
+        
+        </span>
+        <div class="likes">
+            {{ post.like_set.count }}
+        </div>
+    
+        {% if show_delete_icon and  request.user == post.author %}
+            <a href="{% url 'post-delete' post.pk %}">
+                <i class="fa-solid fa-trash-can"></i>
+            </a>
+        {% endif %}
+    
+        {% if show_edit_icon and  request.user == post.author %}
+            <a href="{% url 'post-edit' post.pk %}">
+                <i class="fa-solid fa-pen"></i>
+            </a>
+        {% endif %}
+
+        <div class="author-post">
+           
+            Author:  <a href="{% url 'profile-details' pk=post.author.pk %}">{{ post.author }}
+            </a>
+        </div>
+    </div>
+</div>
+
+
+

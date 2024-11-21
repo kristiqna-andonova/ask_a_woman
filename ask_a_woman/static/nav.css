@@ -1,0 +1,150 @@
+.border-pink {
+      border-color: #f0a1a8 !important;
+  }
+  .navbar-brand, .nav-link {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+  }
+  .btn-outline-pink {
+      color: #f28a8d;
+      border-color: #f28a8d;
+  }
+  .btn-outline-pink:hover {
+      background-color: #f28a8d;
+      color: #fff;
+  }
+
+.navbar-toggler {
+    width: 7%;
+    border: none;
+}
+
+.nav-img {
+    width: 100%;
+    border-radius: 50%;
+    padding: 0;
+}
+
+.li-img {
+    width: 5%;
+}
+
+
+
+@media (max-width: 320px) {
+    div.post-div {
+        margin: 20px 50px;
+    }
+
+    .post-div h2 {
+        padding: 5px;
+        margin-bottom: 20px;
+    }
+    .navbar-toggler:hover {
+        background-color: transparent;
+        border: transparent;
+    }
+
+    input.search-input {
+        width: 100px;
+    }
+    span.navbar-collapsed.show{
+        border-color: transparent;
+    }
+
+    button.navbar-toggler:hover {
+        color: transparent;
+    }
+}
+
+@media (max-width: 380px) {
+    div.post-div {
+        margin: 20px 50px;
+    }
+
+    .post-div h2 {
+        padding: 5px;
+        margin-bottom: 20px;
+    }
+    .navbar-toggler:hover {
+        background-color: transparent;
+        border: transparent;
+    }
+
+    input.search-input {
+        width: 100px;
+    }
+    span.navbar-collapsed.show{
+        border-color: transparent;
+    }
+
+    button.navbar-toggler:hover {
+        color: transparent;
+    }
+}
+
+
+@media (max-width: 425px) {
+    div.post-div {
+        margin: 20px 50px;
+    }
+
+    .post-div h2 {
+        padding: 5px;
+        margin-bottom: 20px;
+    }
+    .navbar-toggler:hover {
+        background-color: transparent;
+        border: transparent;
+    }
+
+    input.search-input {
+        width: 100px;
+    }
+    span.navbar-collapsed.show{
+        border-color: transparent;
+    }
+
+    button.navbar-toggler:hover {
+        color: transparent;
+    }
+}
+
+@media (max-width: 770px) {
+    div.post-div {
+        margin: 20px 50px;
+    }
+
+    .post-div h2 {
+        padding: 5px;
+        margin-bottom: 20px;
+    }
+    .navbar-toggler:hover {
+        background-color: transparent;
+        border: transparent;
+    }
+
+    input.search-input {
+        width: 300px;
+    }
+
+    button.search-button {
+        width: 20%;
+    }
+    span.navbar-collapsed.show{
+        border-color: transparent;
+        margin-right: 5px;
+    }
+
+    button.navbar-toggler:hover {
+        color: transparent;
+    }
+
+    .navbar-toggler {
+        margin-right: 20px;
+    }
+}
+
+
+
+

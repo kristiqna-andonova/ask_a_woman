@@ -1,0 +1,64 @@
+
+
+.styled-select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 14px;
+}
+.styled-select:focus {
+    border-color: #ff99cc;  /* Light pink color for focus */
+    outline: none;
+}
+
+/* Hiding the file input, often used with a custom button */
+.form-group input[type="file"] {
+    display: none;
+}
+
+/* Flex container for Like and Author section */
+.like-author-container {
+    display: flex;
+    align-items: center; /* Vertically align the items */
+    justify-content: flex-start; /* Align items to the left */
+    gap: 10px; /* Space between like icon, like count, and author */
+    flex-wrap: wrap; /* Allow wrapping for small screens */
+}
+
+/* Like icon space adjustment */
+.heart {
+    margin-right: 5px; /* Space between icon and like count */
+}
+
+/* Bold style for like count */
+.likes {
+    font-weight: bold;
+}
+
+/* Pink color when liked */
+
+
+/* Style for the author text */
+.author-post {
+    font-size: 1rem; /* Set font size for author text */
+    padding-bottom: 10px;
+}
+
+
+/* Responsive styling for screens 320px or smaller */
+@media (min-width: 320px) and (max-width: 430px){
+    /* Make the like count invisible */
+    .likes {
+        visibility: hidden; /* Hide the like count */
+        opacity: 0; /* Make it transparent */
+    }
+
+    /* Reduce the gap between the items (like icon, count, and author) */
+    .like-author-container {
+        gap: 5px;
+        padding-top: 10px;/* Reduce the space */
+    }
+
+    }

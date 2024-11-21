@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="error-page">
+    <div class="error-message">
+        <img src="{% static "images/img.png" %}" alt="">
+        <h1>Oops! Page Not Found</h1>
+        <p>Sorry, we couldn't find the page you're looking for.</p>
+        <a href="/" class="go-home-btn">Go to Home</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <main>
+        <section id="edit">
+          <div class="form-container">
+            <h1>You are about to delete your profile. Are you sure?</h1>
+            <!-- Delete Author's Profile Form -->
+
+            <form id="delete" class="delete-form" method="post" action="{% url 'delete-profile' request.user.pk %}">
+              {% csrf_token %}
+                {{ form }}
+              <button type="submit">Confirm</button>
+            </form>
+          </div>
+          <!-- End Delete Form -->
+        </section>
+      </main>
+{% endblock %}

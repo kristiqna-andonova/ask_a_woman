@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1 style="text-align: center">Search Results for "{{ query }}"</h1>
+
+    <!-- Display posts -->
+    <h2>Posts</h2>
+    <div id="posts-container">
+        {% for post in posts %}
+            <a href="{% url 'post-details' pk=post.pk %}" style="text-decoration: none; color: inherit;">
+                {% include 'posts/base_post.html' %}
+            </a>
+        {% endfor %}
+        <div class="pagination">
+        <button id="prev-btn" onclick="changePage('posts', -1)">&#10094;</button>
+        <span>Page {{ posts.number }} of {{ posts.paginator.num_pages }}</span>
+        <button id="next-btn" onclick="changePage('posts', 1)">&#10095;</button>
+    </div>
+    </div>
+
+    <!-- Pagination for posts -->
+    
+
+    <!-- Display profiles -->
+{#    <h2>Profiles</h2>#}
+{#    <div id="profiles-container">#}
+{#        {% for profile in profiles %}#}
+{#            <div class="profile-container">#}
+{#    <div class="profile-card">#}
+{#        <!-- Profile Image -->#}
+{#        <div class="profile-img">#}
+{#            {% if profile.profile_img %}#}
+{#                <img src="{{ profile.profile_img.url }}" alt="{{ profile.user.username }}'s Profile Picture" class="profile-photo">#}
+{#            {% else %}#}
+{#                <img src="{% static 'images/img_1.png' %}" alt="Default Profile Picture" class="profile-photo">#}
+{#            {% endif %}#}
+{#        </div>#}
+{##}
+{#        <!-- Profile Info -->#}
+{#        <div class="profile-info">#}
+{#            <h3 class="username"><a href="{% url 'profile-details' profile.user.pk %}">#}
+{#                {{ profile.user.username }}#}
+{#            </a></h3>#}
+{#            {% if profile.profile_bio %}#}
+{#                <p class="bio">{{ profile.profile_bio }}</p>#}
+{#            {% else %}#}
+{#                <p class="bio">This user has no bio yet.</p>#}
+{#            {% endif %}#}
+{#        </div>#}
+{#    </div>#}
+<h2>Profiles</h2>
+<div id="profiles-container">
+    {% for profile in profiles %}
+        <div class="profile-container">
+            <div class="profile-card">
+                <!-- Profile Image -->
+                <div >
+                    {% if profile.profile_img %}
+                        <img src="{{ profile.profile_img.url }}" alt="{{ profile.user.username }}'s Profile Picture" class="profile-photo">
+                    {% else %}
+                        <img src="{% static 'images/img_1.png' %}" alt="Default Profile Picture" class="profile-photo">
+                    {% endif %}
+                </div>
+
+                <!-- Profile Info -->
+                <div class="profile-info">
+                    <h3 class="username">
+                        <a href="{% url 'profile-details' profile.user.pk %}">{{ profile.user.username }}</a>
+                    </h3>
+                    {% if profile.profile_bio %}
+                        <p class="bio">{{ profile.profile_bio }}</p>
+                    {% else %}
+                        <p class="bio">This user has no bio yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+      
+    <!-- Pagination for profiles -->
+    <div class="pagination">
+        <button id="prev-page-btn" onclick="changePage('profiles', -1)">&#10094;
+           
+        </button>
+        <span>Page {{ profiles.number }} of {{ profiles.paginator.num_pages }}</span>
+        <button id="next-page-btn" onclick="changePage('profiles', 1)">&#10095;
+            
+        </button>
+    </div>
+
+    <script>
+        // JavaScript for handling pagination and dynamically updating content
+        let postsPage = {{ posts.number }};
+        let profilesPage = {{ profiles.number }};
+
+        // Handle the page changes
+        function changePage(type, direction) {
+            let nextPage;
+            if (type === 'posts') {
+                nextPage = postsPage + direction;
+                if (nextPage >= 1 && nextPage <= {{ posts.paginator.num_pages }}) {
+                    postsPage = nextPage;
+                }
+                updatePageContent('posts', postsPage);
+            } else if (type === 'profiles') {
+                nextPage = profilesPage + direction;
+                if (nextPage >= 1 && nextPage <= {{ profiles.paginator.num_pages }}) {
+                    profilesPage = nextPage;
+                }
+                updatePageContent('profiles', profilesPage);
+            }
+        }
+
+        function updatePageContent(type, page) {
+            const url = new URL(window.location.href);
+            if (type === 'posts') {
+                url.searchParams.set('page', page);
+            } else if (type === 'profiles') {
+                url.searchParams.set('profile_page', page);
+            }
+            fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    const doc = new DOMParser().parseFromString(html, 'text/html');
+                    if (type === 'posts') {
+                        document.getElementById('posts-container').innerHTML = doc.getElementById('posts-container').innerHTML;
+                        document.querySelector('.pagination').innerHTML = doc.querySelector('.pagination').innerHTML;
+                    } else if (type === 'profiles') {
+                        document.getElementById('profiles-container').innerHTML = doc.getElementById('profiles-container').innerHTML;
+                        document.querySelector('.pagination').innerHTML = doc.querySelector('.pagination').innerHTML;
+                    }
+                });
+        }
+    </script>
+{% endblock %}

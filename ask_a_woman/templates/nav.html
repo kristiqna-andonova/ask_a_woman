@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg  bg-gradient border border-2 border-pink shadow-sm">
+    <div class="container-fluid p-2 ps-5 pe-5">
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}" style="color: #8c4351;">Ask a Woman</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                {% if request.user.is_authenticated %}
+                    <li class="li-img">
+                        <a href="{% url 'profile-details' request.user.id %}"
+                           style="color: #8c4351;">
+                            {% if user.profile.profile_img %}
+                                <img src="{{ user.profile.profile_img.url }}" class="nav-img">
+
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create-post' %}">Create Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit()"
+                           style="color: #8c4351;"><i class=></i>Log Out</a>
+                    </li>
+
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}" style="color: #8c4351;">Log
+                            In</a>
+                    </li>
+                {% endif %}
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Topics
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'filter-posts' 'Advice' %}">Advice</a></li>
+                        <li><a class="dropdown-item" href="{% url 'filter-posts' 'Question' %}">Questions</a></li>
+                        <li><a class="dropdown-item" href="{% url 'filter-posts' 'Story' %}">Stories</a></li>
+                        <li><a class="dropdown-item" href="{% url 'filter-posts' 'Other' %}">Other</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            <form class="d-flex" role="search" method="get" action="{% url 'search-results' %}">
+                <input class="search-input" type="search" name="q" placeholder="Search" aria-label="Search"
+                       value="{{ request.GET.q }}">
+                <button class="search-button" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">
+    {% csrf_token %}
+</form>
+
+
+
+ 

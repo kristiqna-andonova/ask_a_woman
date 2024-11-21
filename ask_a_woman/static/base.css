@@ -1,0 +1,450 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fafafa;
+    color: #555;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
+}
+
+.container {
+    flex: 1;
+
+}
+
+header {
+    background-color: #ffdee3;
+    padding: 1.5rem 0;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #8c4351;
+    text-align: center;
+}
+
+.nav-link {
+    color: #8c4351 !important;
+    font-weight: 500;
+
+}
+
+.container {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 1.5rem;
+    background-color: #fce4ec; /* Soft Blush Pink */
+
+
+}
+
+
+.btn-primary {
+    background-color: #f28a8d;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #f05d5e;
+}
+
+.container, .btn, .card {
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+    background-color: #f28a8d; /* Soft pink */
+    border: none;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #f05d5e; /* Darker pink for hover */
+    transform: scale(1.05);
+}
+
+.nav-link:hover, .dropdown-item:hover {
+    color: #f28a8d !important;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: #8c4351;
+    position: relative;
+}
+
+.section-title::before {
+    content: '★';
+    color: #f28a8d;
+    font-size: 1.2rem;
+    margin-right: 8px;
+}
+
+.card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border: 1px solid #fce4ec;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+h1, h2, h3, .navbar-brand {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5em
+}
+
+.container {
+    border: 2px solid #f0a1a8;
+}
+
+.navbar {
+    background: #ffdee0;
+}
+
+.form-control:focus {
+    border-color: #f0a1a8;
+    box-shadow: 0 0 0 0.25rem rgb(255, 201, 208)
+}
+
+.home-header {
+    background-size: 100%;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.title h1 {
+    color: #fff;
+    font-size: 5em;
+
+}
+
+.title {
+    padding: 12em;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center; /* Center the search form */
+    margin-top: 20px; /* Add some space above */
+}
+
+.search-form {
+    display: flex; /* Use flex to align the input and button */
+    align-items: center; /* Vertically align items */
+    background-color: #fce4ec; /* Background color for the form */
+    border-radius: 12px; /* Rounded corners */
+    padding: 5px; /* Padding around the input and button */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.search-input {
+    border: 1px solid #f0a1a8; /* Soft border color */
+    border-radius: 8px; /* Rounded corners */
+    padding: 8px; /* Slightly less padding for smaller height */
+    width: 250px; /* Set a fixed width for the input */
+    font-family: 'Poppins', sans-serif; /* Font family */
+    font-size: 1rem; /* Font size */
+    transition: border-color 0.3s ease; /* Smooth transition for focus effect */
+    background-color: #fff;
+}
+
+.search-input:focus {
+    border-color: #f05d5e; /* Change border color on focus */
+    box-shadow: 0 0 0 0.25rem rgba(255, 201, 208, 0.5); /* Shadow effect on focus */
+}
+
+.search-button {
+    background-color: #f28a8d; /* Soft pink background */
+    border: none; /* No border */
+    color: white; /* White text */
+    padding: 8px 16px; /* Adjusted padding for smaller button */
+    border-radius: 8px; /* Rounded corners */
+    font-family: 'Poppins', sans-serif; /* Font family */
+    font-size: 1rem; /* Font size */
+    cursor: pointer; /* Pointer on hover */
+    margin-left: 10px; /* Space between input and button */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+    height: 50px; /* Set a fixed height for the button */
+}
+
+.search-button:hover {
+    background-color: #f05d5e; /* Darker pink on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+
+.post-div h2 {
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+    font-size: 1.5em
+}
+
+.post-div {
+    position: relative;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+
+    margin: 1.5em 5em;
+}
+
+.post-created {
+    position: absolute;
+    top: 10px;
+    margin-bottom: 10px;
+    right: 10px;
+    font-size: 0.9em;
+    color: #888;
+}
+
+.author-post {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.9em;
+    color: #888;
+}
+
+.post-content {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+
+#prev-page-btn, #next-page-btn {
+    background: none; /* Remove background */
+    border: none; /* No border */
+    font-size: 14px; /* Adjust font size */
+    padding: 4px 8px; /* Padding around the arrows */
+    cursor: pointer; /* Pointer cursor */
+    color: #d5006d; /* Light pink color */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center; /* Ensure text is centered */
+    width: 40px; /* Set a fixed width to control button size */
+    height: 40px; /* Set a fixed height */
+    border-radius: 50%; /* Make the button round */
+    margin: 0 10px; /* Add some space between buttons */
+}
+
+#prev-page-btn i, #next-page-btn i {
+    font-size: 12px; /* Adjust icon size */
+}
+
+#prev-page-btn:hover, #next-page-btn:hover {
+    color: #c4005c; /* Hover effect for color */
+}
+
+
+.pagination {
+    text-align: center;
+    justify-content: center;
+}
+
+.profile-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+/* Individual profile card */
+.profile-card {
+    width: 250px; /* Set a fixed width for each profile card */
+    padding: 15px;
+    margin: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    text-align: center; /* Center the content */
+}
+
+/* Profile Image */
+.profile-img {
+    margin-bottom: 15px;
+}
+
+.profile-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #d5006d;
+}
+
+/* Username */
+.username {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #d5006d;
+}
+
+/* Bio */
+.bio {
+    font-size: 0.9em;
+    color: #333;
+    line-height: 1.4;
+}
+
+/* Hover effect for profile card */
+.profile-card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#profiles-container {
+    display: flex; /* Enables flex layout */
+    flex-wrap: wrap; /* Ensures all profiles stay in one row */
+    justify-content: center; /* Centers the cards within the container */
+    overflow-x: auto; /* Allows horizontal scrolling if necessary */
+    gap: 20px; /* Adds space between profile cards */
+    padding: 20px; /* Optional padding for better spacing */
+}
+
+.profile-container {
+    flex: 0 0 auto; /* Prevents shrinking/growing, keeps fixed size */
+    width: 250px; /* Matches the previous card size */
+    box-sizing: border-box; /* Includes padding/border in width */
+}
+
+.profile-card {
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-photo {
+    width: 120px; /* Slightly larger circular photo */
+    height: 120px;
+    border-radius: 50%; /* Makes the photo circular */
+    object-fit: cover; /* Ensures image scales nicely */
+    margin-bottom: 10px;
+}
+
+.username a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2em; /* Slightly larger username text */
+}
+
+.username a:hover {
+    color: lightpink; /* Highlight the username on hover */
+}
+
+.bio {
+    font-size: 1em; /* Keeps the bio text readable */
+    color: #666;
+}
+
+#profiles-container::-webkit-scrollbar {
+    height: 8px; /* Horizontal scrollbar height */
+}
+
+#profiles-container::-webkit-scrollbar-thumb {
+    background: lightpink; /* Scrollbar thumb color */
+    border-radius: 10px; /* Rounded scrollbar */
+}
+
+#profiles-container::-webkit-scrollbar-track {
+    background: #eee; /* Scrollbar track color */
+}
+
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+    .profile-card {
+        width: 220px; /* Slightly reduce card size */
+        margin: 10px; /* Reduce margin between cards */
+    }
+
+    .profile-photo {
+        width: 90px; /* Slightly smaller profile image */
+        height: 90px;
+    }
+
+    .username {
+        font-size: 1.1em; /* Slightly smaller username */
+    }
+
+    .bio {
+        font-size: 0.85em; /* Adjust bio size */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .profile-card {
+        width: 180px; /* Reduce card width */
+        margin: 8px;
+    }
+
+    .profile-photo {
+        width: 80px;
+        height: 80px; /* Smaller profile image */
+    }
+
+    .username {
+        font-size: 1em; /* Further adjust username size */
+    }
+
+    .bio {
+        font-size: 0.8em; /* Smaller bio text */
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .profile-card {
+        width: 160px; /* Even smaller card */
+        margin: 5px; /* Adjust margin */
+    }
+
+    .profile-photo {
+        width: 70px; /* Smaller profile photo */
+        height: 70px;
+    }
+
+    .username {
+        font-size: 0.9em; /* Even smaller username */
+    }
+
+    .bio {
+        font-size: 0.75em; /* Smaller bio text */
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .profile-card {
+        width: 140px; /* Card becomes very small */
+        margin: 5px; /* Minimal margin between cards */
+    }
+
+    .profile-photo {
+        width: 60px; /* Very small profile photo */
+        height: 60px;
+    }
+
+    .username {
+        font-size: 0.85em; /* Reduce username size */
+    }
+
+    .bio {
+        font-size: 0.7em; /* Smaller bio text */
+    }
+}
+

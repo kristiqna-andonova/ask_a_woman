@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    
+    <div class="form-container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+{#            <div class="mb-3">#}
+{#                <label for="id_username" class="form-label">Username</label>#}
+{#                {{ form.username }}#}
+{#                <small class="form-text text-muted">{{ form.username.help_text }}</small>#}
+{#                {% if form.username.errors %}#}
+{#                    <div class="text-danger">{{ form.username.errors }}</div>#}
+{#                {% endif %}#}
+{#            </div>#}
+{##}
+{#            <div class="mb-3">#}
+{#                <label for="id_password" class="form-label">Password</label>#}
+{#                {{ form.password }}#}
+{#                <small class="form-text text-muted">{{ form.password.help_text }}</small>#}
+{#                {% if form.password.errors %}#}
+{#                    <div class="text-danger">{{ form.password.errors }}</div>#}
+{#                {% endif %}#}
+{#            </div>#}
+
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <div class="message">
+            Don't have an account? <a href="{% url 'register' %}">Register here</a>.
+        </div>
+    </div>
+{% endblock %}
