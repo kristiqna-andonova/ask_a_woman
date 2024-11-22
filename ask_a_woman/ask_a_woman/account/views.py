@@ -28,69 +28,6 @@ class UserRegisterView(CreateView):
 
         return  response
 
-
-# def profile_details(request, pk):
-#     profile = get_object_or_404(Profile, user_id=pk)
-#     posts = Post.objects.filter(author_id=pk).order_by('-created_at')
-#
-#     # Pagination for regular posts
-#     paginator = Paginator(posts, 3)  # 3 posts per page
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-#
-#     # Pagination for bookmarked posts
-#     bookmarked_posts = Bookmark.objects.filter(user=request.user).select_related('post').order_by('-created_at')
-#     bookmarked_paginator = Paginator(bookmarked_posts, 3)  # 3 bookmarked posts per page
-#     bookmarked_page_number = request.GET.get('bookmarked_page')
-#     bookmarked_page_obj = bookmarked_paginator.get_page(bookmarked_page_number)
-#
-#     # Add 'has_liked' and 'is_bookmarked' attributes for posts on the current page
-#     if request.user.is_authenticated:
-#         for post in page_obj:
-#             post.has_liked = post.like_set.filter(user=request.user).exists()
-#             post.has_bookmarked = Bookmark.objects.filter(user=request.user, post=post).exists()
-#
-#     # Handle follow/unfollow logic
-#     if request.method == 'POST':
-#         if not request.user.is_authenticated:
-#             return redirect('login')
-#
-#         current_profile = request.user.profile
-#         action = request.POST.get('follow', '')
-#
-#         if action == "unfollow":
-#             current_profile.follows.remove(profile)
-#         elif action == "follow":
-#             current_profile.follows.add(profile)
-#
-#         current_profile.save()
-#
-#         # Bookmark/unbookmark logic
-#         if 'bookmark' in request.POST:
-#             post_id = request.POST.get('post_id')
-#             post = get_object_or_404(Post, pk=post_id)
-#             bookmark, created = Bookmark.objects.get_or_create(user=request.user, post=post)
-#             if not created:  # If already bookmarked, remove it
-#                 bookmark.delete()
-#
-#             # Returning a JSON response to toggle UI changes dynamically
-#             return JsonResponse({
-#                 'is_bookmarked': created  # True if it was newly bookmarked, False if unbookmarked
-#             })
-#
-#     context = {
-#         "profile": profile,
-#         "posts": page_obj,
-#         "bookmarked_posts": bookmarked_page_obj,  # Add paginated bookmarked posts to context
-#         "page_obj": page_obj,
-#         "bookmarked_page_obj": bookmarked_page_obj,  # Add paginated bookmarked posts page object
-#         "show_delete_icon": request.user.is_authenticated,
-#         "show_edit_icon": request.user.is_authenticated,
-#     }
-#
-#     return render(request, 'profile/profile_details.html', context)
-
-
 def profile_details(request, pk):
     profile = get_object_or_404(Profile, user_id=pk)
     posts = Post.objects.filter(author_id=pk).order_by('-created_at')

@@ -19,3 +19,4 @@ class EditPostForm(CreatePostForm):
 
 class DeletePost(ReadOnlyMixin, CreatePostForm):
     read_only_fields = ['title', 'description', 'type']
+

@@ -22,8 +22,8 @@
 .like-author-container {
     display: flex;
     align-items: center; /* Vertically align the items */
+    gap: 10px;
     justify-content: flex-start; /* Align items to the left */
-    gap: 10px; /* Space between like icon, like count, and author */
     flex-wrap: wrap; /* Allow wrapping for small screens */
 }
 
@@ -48,17 +48,26 @@
 
 
 /* Responsive styling for screens 320px or smaller */
-@media (min-width: 320px) and (max-width: 430px){
-    /* Make the like count invisible */
+@media (min-width: 320px) and (max-width: 430px) {
+    /* Hide the like count for smaller screens */
     .likes {
-        visibility: hidden; /* Hide the like count */
-        opacity: 0; /* Make it transparent */
+        visibility: hidden;
+        opacity: 0;
     }
 
-    /* Reduce the gap between the items (like icon, count, and author) */
+    /* Adjust spacing in like-author container */
     .like-author-container {
-        gap: 5px;
-        padding-top: 10px;/* Reduce the space */
+        gap: 5px; /* Reduce gap between items */
+        padding-top: 10px; /* Add space above */
     }
 
+    /* Adjust margins for the post container */
+    .post-div {
+        margin: 0 40px;
     }
+
+    .like-author-container {
+        padding-right: 10px;
+        gap: 0;
+    }
+}

@@ -12,5 +12,6 @@ path('<str:type>/', views.FilteredPostsView.as_view(), name='filter-posts'),
         path('post-edit/', views.EditPostView.as_view(), name='post-edit'),
         path('comment/', views.comment_functionality, name='comment-functionality'),
         path('bookmark/', views.bookmark_functionality, name='bookmark-functionality'),
+        path('comment/delete/<int:comment_id>/', views.DeleteCommentView.as_view(), name='delete-comment'),
     ]))
 ]

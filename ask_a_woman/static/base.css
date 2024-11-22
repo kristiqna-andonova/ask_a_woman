@@ -368,83 +368,119 @@ h1, h2, h3, .navbar-brand {
 
 
 /* Media Queries for Responsiveness */
+/* General Small Screen Adjustments */
 @media screen and (max-width: 768px) {
     .profile-card {
-        width: 220px; /* Slightly reduce card size */
-        margin: 10px; /* Reduce margin between cards */
+        width: 220px;
+        margin: 10px;
     }
 
     .profile-photo {
-        width: 90px; /* Slightly smaller profile image */
+        width: 90px;
         height: 90px;
     }
 
     .username {
-        font-size: 1.1em; /* Slightly smaller username */
+        font-size: 1.1em;
     }
 
     .bio {
-        font-size: 0.85em; /* Adjust bio size */
+        font-size: 0.85em;
+    }
+
+    .search-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-input, .search-button {
+        width: 100%;
     }
 }
 
+/* Extra Small Screen Adjustments */
 @media screen and (max-width: 480px) {
     .profile-card {
-        width: 180px; /* Reduce card width */
+        width: 180px;
         margin: 8px;
     }
 
     .profile-photo {
         width: 80px;
-        height: 80px; /* Smaller profile image */
+        height: 80px;
     }
 
     .username {
-        font-size: 1em; /* Further adjust username size */
+        font-size: 1em;
     }
 
     .bio {
-        font-size: 0.8em; /* Smaller bio text */
+        font-size: 0.8em;
+    }
+
+    .btn, .search-button {
+        font-size: 0.9rem;
+        padding: 10px 14px;
+        width: 100%;
+    }
+
+    #prev-page-btn, #next-page-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .pagination {
+        flex-wrap: wrap;
     }
 }
 
+/* Very Small Screen Adjustments */
 @media screen and (max-width: 380px) {
     .profile-card {
-        width: 160px; /* Even smaller card */
-        margin: 5px; /* Adjust margin */
+        width: 160px;
+        margin: 5px;
     }
 
     .profile-photo {
-        width: 70px; /* Smaller profile photo */
+        width: 70px;
         height: 70px;
     }
 
     .username {
-        font-size: 0.9em; /* Even smaller username */
+        font-size: 0.9em;
     }
 
     .bio {
-        font-size: 0.75em; /* Smaller bio text */
+        font-size: 0.75em;
+    }
+
+    h1, h2, h3 {
+        font-size: 1.2em;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
     }
 }
 
+/* Extremely Small Screen Adjustments */
 @media screen and (max-width: 320px) {
     .profile-card {
-        width: 140px; /* Card becomes very small */
-        margin: 5px; /* Minimal margin between cards */
+        width: 140px;
+        margin: 5px;
     }
 
     .profile-photo {
-        width: 60px; /* Very small profile photo */
+        width: 60px;
         height: 60px;
     }
 
     .username {
-        font-size: 0.85em; /* Reduce username size */
+        font-size: 0.85em;
     }
 
     .bio {
-        font-size: 0.7em; /* Smaller bio text */
+        font-size: 0.7em;
     }
 }
-

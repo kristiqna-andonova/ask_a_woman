@@ -121,14 +121,107 @@
     border-radius: 20%;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .comments {
+        margin: 15px 40px; /* Reduce margin for smaller screens */
         padding: 10px;
     }
 
     .profilepic .profile_img {
-        width: 40px;
+        width: 40px; /* Reduce profile picture size */
         height: 40px;
+    }
+
+    .comment-data p {
+        font-size: 16px; /* Adjust font size for readability */
+    }
+
+    .comment-form {
+        max-width: 90%; /* Reduce the form's maximum width */
+        margin: 0 auto; /* Ensure the form is centered */
+    }
+
+    .comment-input-container {
+        flex-direction: column; /* Stack input and button */
+        gap: 5px;
+    }
+
+    .comment-input {
+        width: 100%; /* Full width for smaller screens */
+    }
+
+    .comment-submit-btn {
+        width: 100%; /* Full-width button for better UX */
+        padding: 10px; /* Adjust padding */
+    }
+}
+
+/* Further Adjustments for Very Small Screens */
+@media (max-width: 480px) {
+    .comments {
+        margin: 10px 20px; /* Further reduce margins */
+    }
+
+    .profilepic .profile_img {
+        width: 35px; /* Smaller profile image */
+        height: 35px;
+    }
+
+    .comment-data a {
+        font-size: 14px; /* Adjust username font size */
+    }
+
+    .comment-data p {
+        font-size: 14px; /* Adjust comment font size */
+    }
+
+    .comment-form {
+        width: 100%; /* Full width for very small screens */
+        padding: 0 10px; /* Add horizontal padding */
+    }
+
+    .comment-input {
+        font-size: 14px; /* Smaller font size for input field */
+    }
+
+    .comment-submit-btn {
+        font-size: 14px; /* Adjust button font size */
+    }
+}
+
+/* Extremely Small Screens */
+@media (max-width: 320px) {
+    .comments {
+        margin: 5px 10px; /* Minimal margin */
+        padding: 8px;
+    }
+
+    .profilepic .profile_img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .comment-data p {
+        font-size: 12px;
+    }
+
+    .comment-input-container {
+        margin: 0; /* Remove extra margin */
+        gap: 5px;
+    }
+
+    .comment-input {
+        width: 100%; /* Full width */
+        padding: 5px; /* Smaller padding */
+    }
+
+    .comment-submit-btn {
+        width: 100%; /* Full-width button */
+        padding: 8px;
+        font-size: 12px; /* Smaller font size */
+    }
+
+    .bookmark-btn {
+        padding: 5px; /* Smaller bookmark button */
     }
 }

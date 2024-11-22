@@ -1,6 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
+from django.views import View
 from django.views.generic import CreateView, DetailView, DeleteView, UpdateView, ListView
 
 from ask_a_woman.account.models import Profile
@@ -24,35 +26,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-# class PostDetailView(DetailView):
-#     model = Post
-#     template_name = 'posts/post_details.html'
-#     login_url = reverse_lazy('login')
-#     context_object_name = 'posts'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         post = self.object
-#         user = self.request.user
-#
-#             # Check if the current user has liked the post
-#         if user.is_authenticated:
-#             for post in context['posts']:
-#                 post.has_liked = post.like_set.filter(user=user).exists()
-#
-#             # Fetch comments using the correct field name 'to_post'
-#         comments = Comment.objects.filter(to_post=post).order_by('-date_time_of_publication')
-#
-#             # Add additional context variables
-#         context.update({
-#             'show_delete_icon': self.request.user == post.author,  # Only show delete icon for the author
-#             'show_edit_icon': self.request.user == post.author,  # Only show edit icon for the author
-#             'post': post,
-#             'comments': comments,
-#             'comment_form': CommentForm()
-#         })
-#
-#         return context
+
 class PostDetailView(DetailView):
     model = Post
     template_name = 'posts/post_details.html'
@@ -128,6 +102,11 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
         return context
 
+
+class DeleteComment(DeleteView):
+    model = Comment
+
+
     def get_success_url(self):
         referer = self.request.META.get('HTTP_REFERER', '')
         post_details_url = reverse('post-details', kwargs={'pk': self.object.pk})
@@ -193,3 +172,16 @@ class FilteredPostsView(ListView):
         return context
 
 
+class DeleteCommentView(LoginRequiredMixin, View):
+    def get(self, request, pk, comment_id):
+        # Fetch the post and the comment
+        post = get_object_or_404(Post, id=pk)
+        comment = get_object_or_404(Comment, id=comment_id)
+
+        # Check if the user is authorized to delete the comment
+        if request.user == comment.user or request.user == post.author:
+            comment.delete()
+            return redirect('post-details', pk=post.id)
+        else:
+            # If not authorized, return a forbidden response
+            return HttpResponseForbidden("You are not allowed to delete this comment.")
