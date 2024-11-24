@@ -90,6 +90,17 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     form_class = DeletePost
     template_name = 'posts/delete-post.html'
 
+    def get_success_url(self):
+        referer = self.request.META.get('HTTP_REFERER', '')
+        post_details_url = reverse('post-details', kwargs={'pk': self.object.pk})
+        home_url = reverse('home')  # Replace 'home-page' with your home view's URL name
+
+        # If the referer contains 'post-details', return there; otherwise, go to home
+        if 'post-details' in referer:
+            return post_details_url
+        else:
+            return home_url
+
     def get_initial(self):
         return self.object.__dict__
 
@@ -103,20 +114,19 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
         return context
 
 
-class DeleteComment(DeleteView):
-    model = Comment
-
-
-    def get_success_url(self):
-        referer = self.request.META.get('HTTP_REFERER', '')
-        post_details_url = reverse('post-details', kwargs={'pk': self.object.pk})
-        home_url = reverse('home')  # Replace 'home-page' with your home view's URL name
-
-        # If the referer contains 'post-details', return there; otherwise, go to home
-        if 'post-details' in referer:
-            return post_details_url
-        else:
-            return home_url
+# class DeleteComment(DeleteView):
+#     model = Comment
+#
+#     def get_success_url(self):
+#         referer = self.request.META.get('HTTP_REFERER', '')
+#         post_details_url = reverse('post-details', kwargs={'pk': self.object.pk})
+#         home_url = reverse('home')  # Replace 'home-page' with your home view's URL name
+#
+#         # If the referer contains 'post-details', return there; otherwise, go to home
+#         if 'post-details' in referer:
+#             return post_details_url
+#         else:
+#             return home_url
 
 
 class EditPostView(UpdateView):

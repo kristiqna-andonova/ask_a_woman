@@ -2,3 +2,4 @@ django
 cloudinary
 pillow
 psycopg2
+django-crispy-forms
