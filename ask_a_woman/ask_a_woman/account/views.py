@@ -1,15 +1,11 @@
 from django.contrib.auth import login, get_user_model, update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.paginator import Paginator
-from django.http import Http404, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.template.base import kwarg_re
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 
-from ask_a_woman.account.models import Profile, AppUser
+from ask_a_woman.account.models import Profile
 from ask_a_woman.account.forms import UpdateForm, CustomUserForm, CustomPasswordChangeForm, ProfilePicForm
 from ask_a_woman.common.models import Bookmark
 from ask_a_woman.post.models import Post
@@ -31,17 +27,13 @@ class UserRegisterView(CreateView):
 def profile_details(request, pk):
     profile = get_object_or_404(Profile, user_id=pk)
     posts = Post.objects.filter(author_id=pk).order_by('-created_at')
-
-    # Fetch all the bookmarked posts without pagination
     bookmarked_posts = Bookmark.objects.filter(user=request.user).select_related('post').order_by('-created_at')
 
-    # Add 'has_liked' and 'is_bookmarked' attributes for posts on the current page
     if request.user.is_authenticated:
         for post in posts:
             post.has_liked = post.like_set.filter(user=request.user).exists()
             post.has_bookmarked = Bookmark.objects.filter(user=request.user, post=post).exists()
 
-    # Handle follow/unfollow logic
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return redirect('login')
@@ -56,23 +48,21 @@ def profile_details(request, pk):
 
         current_profile.save()
 
-        # Bookmark/unbookmark logic
         if 'bookmark' in request.POST:
             post_id = request.POST.get('post_id')
             post = get_object_or_404(Post, pk=post_id)
             bookmark, created = Bookmark.objects.get_or_create(user=request.user, post=post)
-            if not created:  # If already bookmarked, remove it
+            if not created:
                 bookmark.delete()
 
-            # Returning a JSON response to toggle UI changes dynamically
             return JsonResponse({
-                'is_bookmarked': created  # True if it was newly bookmarked, False if unbookmarked
+                'is_bookmarked': created
             })
 
     context = {
         "profile": profile,
-        "posts": posts,  # All posts for the user
-        "bookmarked_posts": bookmarked_posts,  # All bookmarked posts
+        "posts": posts,
+        "bookmarked_posts": bookmarked_posts,
         "show_delete_icon": request.user.is_authenticated,
         "show_edit_icon": request.user.is_authenticated,
     }
@@ -87,24 +77,15 @@ class UserProfileUpdateView(UpdateView):
     template_name = 'profile/profile_update.html'
 
     def get_object(self, queryset=None):
-        """
-        Retrieve the current user instance to update.
-        """
         return self.request.user
 
     def get_context_data(self, **kwargs):
-        """
-        Add the profile form to the context.
-        """
         context = super().get_context_data(**kwargs)
         user_profile = get_object_or_404(Profile, user=self.request.user)
         context['profile_form'] = ProfilePicForm(instance=user_profile)
         return context
 
     def form_valid(self, form):
-        """
-        Handle form submission and check if the email is already in use.
-        """
         email = form.cleaned_data.get('email')
         current_user = self.request.user
         if email:
@@ -130,9 +111,6 @@ class UserProfileUpdateView(UpdateView):
         return self.form_invalid(form)
 
     def form_invalid(self, form):
-        """
-        Handle form errors.
-        """
         messages.error(self.request, "Please correct the errors below.")
         return self.render_to_response(self.get_context_data(form=form))
 
@@ -140,18 +118,16 @@ class UserProfileUpdateView(UpdateView):
 def change_password(request):
     if not request.user.is_authenticated:
         messages.error(request, "You must be logged in to change your password.")
-        return redirect('login')  # Redirect to login or any other page for unauthenticated users
+        return redirect('login')
 
     if request.method == 'POST':
         form = CustomPasswordChangeForm(user=request.user, data=request.POST)
 
         if form.is_valid():
-            form.save()  # Save the new password for the user
+            form.save()
 
-            # Re-authenticate the user to keep them logged in after password change
-              # Log the user back in
             login(request, request.user)
-            # Update the session to prevent logouts after password change
+
             update_session_auth_hash(request, request.user)
             login(request, request.user)
 
