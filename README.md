@@ -9,4 +9,4 @@
 - **Comment System**: Participate in discussions and provide feedback through comments.  
 
 This platform prioritizes safety and inclusivity, creating an environment where everyone feels respected and heard. 
- - **The .env information you can view in:** 
+ - **The .env information you can view in: https://docs.google.com/document/d/e/2PACX-1vSk2oH-b2vOWYaoc2l5zyX1KL7gVOFHbRsTMm5TAuYmslLzZevTYdQVAe6oDf0NLrPjLEZ_FcoJboX6/pub** 
