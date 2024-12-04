@@ -27,7 +27,9 @@ class UserRegisterView(CreateView):
 def profile_details(request, pk):
     profile = get_object_or_404(Profile, user_id=pk)
     posts = Post.objects.filter(author_id=pk).order_by('-created_at')
-    bookmarked_posts = Bookmark.objects.filter(user=request.user).select_related('post').order_by('-created_at')
+    bookmarked_posts = None
+    if request.user.is_authenticated and request.user == profile.user:
+        bookmarked_posts = Bookmark.objects.filter(user=request.user).select_related('post').order_by('-created_at')
 
     if request.user.is_authenticated:
         for post in posts:
