@@ -9,10 +9,11 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 from decouple import config
+
 from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,12 +24,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY', config('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', config('DEBUG')) == 'True'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', config('ALLOWED_HOSTS')).split(',')
+
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', config('CSRF_TRUSTED_ORIGINS', [])).split(',')
 
 
 # Application definition
@@ -85,11 +88,11 @@ WSGI_APPLICATION = 'ask_a_woman.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": config('DATABASE_NAME'),
-        "USER": config('DATABASE_USER'),
-        "PASSWORD": config('DATABASE_PASSWORD'),
-        "HOST": config('DATABASE_HOST', default='127.0.0.1'),
-        "PORT": config('DATABASE_PORT', default='5432'),
+        "NAME": os.getenv('DATABASE_NAME',config('DATABASE_NAME')),
+        "USER": os.getenv('DATABASE_USER',config('DATABASE_USER')),
+        "PASSWORD": os.getenv('DATABASE_PASSWORD',config('DATABASE_PASSWORD')),
+        "HOST": os.getenv('DATABASE_HOST',config('DATABASE_HOST')),
+        "PORT": os.getenv('DATABASE_PORT',config('DATABASE_PORT')),
     }
 }
 
