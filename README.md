@@ -8,6 +8,8 @@
 - **Follow Users**: Stay updated by following your favorite users.  
 - **Comment System**: Participate in discussions and provide feedback through comments.
 - **Bookmark**: Save the most interesting posts on your profile page
-
+  
+ **The platform is HOSTED on:** https://askawoman-g7erh8hraacgb5gd.italynorth-01.azurewebsites.net
+ 
 This platform prioritizes safety and inclusivity, creating an environment where everyone feels respected and heard. 
  - **The .env information you can view in: https://docs.google.com/document/d/e/2PACX-1vSk2oH-b2vOWYaoc2l5zyX1KL7gVOFHbRsTMm5TAuYmslLzZevTYdQVAe6oDf0NLrPjLEZ_FcoJboX6/pub** 
