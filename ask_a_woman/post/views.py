@@ -178,6 +178,8 @@ class FilteredPostsView(ListView):
         if user.is_authenticated:
             for post in context['posts']:
                 post.has_liked = post.like_set.filter(user=user).exists()
+                post.has_bookmarked = Bookmark.objects.filter(user=user, post=post).exists()
+
 
         return context
 
