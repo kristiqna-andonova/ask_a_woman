@@ -1,0 +1,356 @@
+/* Light Pink Theme */
+/* Light Pink Theme */
+@import url('https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Poetsen+One&display=swap');
+
+.bg-pink {
+    background-color: #c8a8b5;
+}
+
+.text-pink {
+    color: #ff69b4;
+}
+
+.card-header {
+    font-weight: bold;
+    font-size: 1.2rem;
+    background-color: #fff5fb;
+}
+
+.card-body {
+    font-size: 1rem;
+    padding: 0;
+}
+
+.card-text a {
+    display: block;
+    margin: 5px 0;
+}
+
+.card-text a:hover {
+    text-decoration: underline;
+    color: #ff1493;
+}
+
+.card {
+    border: 2px solid #f1c6d4;
+    border-radius: 10px;
+    padding: 0;
+    margin: 1em;
+}
+
+.card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.title-profile {
+    font-size: 2.5em;
+    margin: 1em;
+    /*font-family: "Delius Swash Caps", cursive;*/
+}
+
+a {
+    color: #d5006d;
+    text-decoration: none;
+}
+
+/* Custom styling for follow/unfollow buttons */
+.btn-follow,
+.btn-unfollow {
+    font-size: 0.9rem;
+    padding: 8px 11px;
+    border-radius: 6px;
+    border: none;
+    width: 40%;
+    text-align: center;
+    color: #fff;
+}
+
+.btn-follow {
+    background-color: #28a745; /* Green */
+}
+
+.btn-unfollow {
+    background-color: #dc3545; /* Red */
+}
+
+.btn-follow:hover,
+.btn-unfollow:hover {
+    opacity: 0.9;
+}
+
+.btn-follow:hover {
+    background: #31c35e;
+    color: #fff;
+}
+
+.btn-unfollow:hover {
+    background: #ff4a5f;
+    color: #fff;
+}
+
+#prev-btn, #next-btn {
+    background: none;
+    border: none;
+    font-size: 12px;
+    padding: 4px;
+    cursor: pointer;
+    color: #d5006d;
+    width: 3%;
+}
+
+.following-container {
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.btn-outline-secondary {
+    background-color: #ff69b4;
+    color: white;
+    padding: 9px 28px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-outline-secondary:hover {
+    background-color: #ff85c1;
+    padding: 11px 32px;
+}
+
+.btn-outline-secondary a {
+    text-decoration: none;
+    color: white;
+}
+
+.profile-img {
+    width: 40%;
+    margin: 1em;
+    border-radius:50%;
+    border: 2px solid #f81b8f;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+/* Image styling */
+.post-img {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #f81b8f;
+}
+
+/* Title styling */
+.post-title {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #f81b8f;
+}
+
+/* Additional styling for responsiveness */
+@media (max-width: 768px) {
+    .post-header {
+        gap: 10px;
+    }
+    .post-img {
+        width: 45px;
+        height: 45px;
+    }
+    .post-title {
+        font-size: 1.25rem;
+    }
+
+    /* Make profile image more responsive */
+    .profile-img {
+        width: 50%;
+        margin: 1em auto;
+    }
+
+    /* Make follow/unfollow buttons full width */
+    .btn-follow,
+    .btn-unfollow {
+        width: 100%;
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    /* Adjust title size for smaller screens */
+    .title-profile {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    /* Stack columns on smaller screens */
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .col-8, .col-4 {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* Adjust pagination buttons */
+    #prev-btn, #next-btn {
+        font-size: 14px;
+        width: auto;
+    }
+
+    /* Following/followed containers */
+    .following-container, .followed-by-container {
+        max-height: 200px;
+    }
+
+    .btn-outline-secondary {
+        font-size: 1rem;
+        width: 100%;
+        padding: 12px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-img {
+        width: 70%;
+    }
+
+    .title-profile {
+        font-size: 1.75em;
+    }
+
+    .btn-follow,
+    .btn-unfollow,
+    .btn-outline-secondary {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    /* Adjust profile image for small screens */
+    .profile-img {
+        width: 60%; /* Slightly smaller image */
+        margin: 0 auto; /* Center the image */
+    }
+
+    /* Adjust title size and layout for small screens */
+    .post-header {
+        flex-direction: column; /* Stack the image and title vertically on very small screens */
+        align-items: center; /* Center the content */
+    }
+
+    .post-img {
+        width: 40px;  /* Reduce image size */
+        height: 40px; /* Reduce image size */
+    }
+
+    .post-title {
+        font-size: 1.2rem;  /* Smaller font size for better readability */
+        text-align: center; /* Center the title */
+        word-wrap: break-word; /* Allow text to wrap to the next line if needed */
+        margin: 5px 0;  /* Add spacing around the title */
+        line-height: 1.2; /* Adjust line height for better readability */
+    }
+
+    /* Adjust the button size and layout for small screens */
+    .btn-follow,
+    .btn-unfollow,
+    .btn-outline-secondary {
+        font-size: 0.8rem; /* Compact button text */
+        padding: 8px; /* Adjust padding for smaller buttons */
+        width: 90%; /* Make buttons fit within small screens */
+    }
+
+    .card {
+        width: 95%; /* Full width for cards */
+        margin: 0.5em auto; /* Center the cards */
+    }
+
+    /* Ensure the following container doesn't break layout */
+    .following-container,
+    .followed-by-container {
+        max-height: 150px; /* Keep scrolling height manageable */
+        overflow-y: auto; /* Allow scrolling */
+    }
+}
+
+
+@media (max-width: 380px) {
+    /* Post header adjustment */
+    .post-header {
+        flex-direction: column; /* Stack image and title vertically */
+        align-items: center; /* Center the items */
+        gap: 10px; /* Small gap between image and title */
+        text-align: center; /* Center the title and image */
+    }
+
+    /* Post image size adjustment */
+    .post-img {
+        width: 45px; /* Adjust image size */
+        height: 45px;
+        margin-bottom: 8px; /* Add space below image */
+    }
+
+    /* Post title adjustment */
+    .post-title {
+        font-size: 1.1rem; /* Smaller title size */
+        color: #f81b8f; /* Maintain pink color */
+        margin: 0; /* Remove any margin */
+        word-wrap: break-word; /* Ensure title doesn't overflow */
+    }
+
+    /* Content font size and styling */
+    .post-content {
+        font-size: 0.9rem; /* Slightly smaller content font size */
+        margin-top: 8px; /* Space between content and title */
+    }
+
+    /* Author info styling */
+    .author-post {
+        font-size: 0.8rem; /* Smaller font size for author */
+        color: #d5006d; /* Author name color */
+    }
+
+    /* Button adjustments */
+    .btn-follow,
+    .btn-unfollow,
+    .btn-outline-secondary {
+        font-size: 0.9rem; /* Slightly smaller button font */
+        padding: 7px 14px; /* Adjust padding for smaller screens */
+        width: 85%; /* Buttons should take up more width */
+        margin: 8px auto; /* Center the buttons */
+    }
+
+    /* Card adjustments */
+    .card {
+        width: 95%; /* Card should be 95% of the screen width */
+        margin: 0.5em auto; /* Center the card */
+    }
+
+    /* Following container adjustments */
+    .following-container,
+    .followed-by-container {
+        max-height: 140px; /* Allow more space for content */
+        overflow-y: auto; /* Enable scrolling */
+    }
+
+    /* Pagination button adjustments */
+    #prev-btn, #next-btn {
+        font-size: 14px; /* Slightly larger pagination button text */
+        padding: 5px 10px; /* Add more padding for ease of clicking */
+        width: auto; /* Adjust width for better fit */
+    }
+}

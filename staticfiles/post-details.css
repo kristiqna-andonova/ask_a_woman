@@ -1,0 +1,227 @@
+/* General container for comments */
+.comments {
+    margin: 24px 80px;
+    padding: 15px;
+    background-color: #f9f9f9; /* Light background for comments */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Top section of the comment: includes user details and timestamp */
+.comments .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* User Details section */
+.userDetails {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Profile picture container */
+.profilepic .profile_img {
+    width: 50px; /* Profile picture size */
+    height: 50px;
+    border-radius: 50%; /* Makes it circular */
+    overflow: hidden; /* Ensures image stays within the circle */
+    border: 2px solid #ffc0cb; /* Light pink border */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Profile picture image */
+.profilepic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image scales properly */
+}
+
+/* Comment text container */
+.comment-data {
+    flex: 1; /* Takes up remaining space */
+}
+
+/* User name link */
+.comment-data a {
+    font-weight: bold;
+    color: #333; /* Neutral dark color for text */
+    text-decoration: none;
+}
+
+.comment-data a:hover {
+    color: #ffc0cb; /* Light pink on hover */
+}
+
+/* Comment text */
+.comment-data p {
+    margin: 5px 0 0;
+    color: #555;
+    font-size: 20px;/* Slightly lighter than username */
+
+}
+
+/* Timestamp */
+.comments span {
+    font-size: 12px;
+    color: #888; /* Subtle gray for timestamp */
+    margin-top: auto;
+}
+
+.comment-form {
+    width: 100%; /* Full width or any desired width (e.g., 80%) */
+    max-width: 600px; /* Set a max width for larger screens */
+    margin: 0 auto; /* Center the form */
+}
+
+.comment-input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    gap: 10px;
+
+}
+
+.comment-input {
+    width: 100%; /* Makes the text area/input field full width */
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.comment-input:focus {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.comment-submit-btn {
+    width: auto; /* Adjust button width, optional */
+    padding: 10px 20px;
+    background-color: hotpink;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-submit-btn:hover {
+    background-color: #f81b8f;
+    color: #ffc9d0;
+}
+
+.bookmark-btn {
+    padding: 8px 10px;
+    border-radius: 20%;
+}
+
+@media (max-width: 768px) {
+    .comments {
+        margin: 15px 40px; /* Reduce margin for smaller screens */
+        padding: 10px;
+    }
+
+    .profilepic .profile_img {
+        width: 40px; /* Reduce profile picture size */
+        height: 40px;
+    }
+
+    .comment-data p {
+        font-size: 16px; /* Adjust font size for readability */
+    }
+
+    .comment-form {
+        max-width: 90%; /* Reduce the form's maximum width */
+        margin: 0 auto; /* Ensure the form is centered */
+    }
+
+    .comment-input-container {
+        flex-direction: column; /* Stack input and button */
+        gap: 5px;
+    }
+
+    .comment-input {
+        width: 100%; /* Full width for smaller screens */
+    }
+
+    .comment-submit-btn {
+        width: 100%; /* Full-width button for better UX */
+        padding: 10px; /* Adjust padding */
+    }
+}
+
+/* Further Adjustments for Very Small Screens */
+@media (max-width: 480px) {
+    .comments {
+        margin: 10px 20px; /* Further reduce margins */
+    }
+
+    .profilepic .profile_img {
+        width: 35px; /* Smaller profile image */
+        height: 35px;
+    }
+
+    .comment-data a {
+        font-size: 14px; /* Adjust username font size */
+    }
+
+    .comment-data p {
+        font-size: 14px; /* Adjust comment font size */
+    }
+
+    .comment-form {
+        width: 100%; /* Full width for very small screens */
+        padding: 0 10px; /* Add horizontal padding */
+    }
+
+    .comment-input {
+        font-size: 14px; /* Smaller font size for input field */
+    }
+
+    .comment-submit-btn {
+        font-size: 14px; /* Adjust button font size */
+    }
+}
+
+/* Extremely Small Screens */
+@media (max-width: 320px) {
+    .comments {
+        margin: 5px 10px; /* Minimal margin */
+        padding: 8px;
+    }
+
+    .profilepic .profile_img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .comment-data p {
+        font-size: 12px;
+    }
+
+    .comment-input-container {
+        margin: 0; /* Remove extra margin */
+        gap: 5px;
+    }
+
+    .comment-input {
+        width: 100%; /* Full width */
+        padding: 5px; /* Smaller padding */
+    }
+
+    .comment-submit-btn {
+        width: 100%; /* Full-width button */
+        padding: 8px;
+        font-size: 12px; /* Smaller font size */
+    }
+
+    .bookmark-btn {
+        padding: 5px; /* Smaller bookmark button */
+    }
+}

@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif; /* Clean and modern font */
+    background-color: #fff0f6; /* Very light pink background for the body */
+}
+
+.form-container {
+    max-width: 440px; /* Maximum width of the form */
+    margin: 50px auto; /* Centering the form */
+    padding: 45px; /* Padding inside the form */
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+h2 {
+    font-size: 30px; /* Size of the heading */
+    color: #d5006d; /* Dark pink color for the heading */
+    text-align: center; /* Center text alignment */
+    margin-bottom: 30px; /* Space below heading */
+}
+
+label {
+    font-size: 20px; /* Size of labels */
+    color: #333; /* Dark color for contrast */
+}
+
+input, textarea {
+    border-radius: 15px; /* Rounded input and textarea */
+    outline: none; /* Remove outline on focus */
+    background: #f8d7da; /* Light pink background for inputs */
+    width: 100%; /* Full width */
+    height: 50px; /* Fixed height */
+    border: 1px solid #f4c2c2; /* Light pink border */
+    margin: 0 0 15px; /* Margin between elements */
+    padding: 15px; /* Padding inside inputs */
+    box-sizing: border-box; /* Include padding in width/height */
+    font-size: 14px; /* Font size for inputs */
+    font-family: 'Poppins', sans-serif; /* Consistent font */
+}
+
+input:focus, textarea:focus {
+    border-color: #ff6f81; /* Darker pink border on focus */
+    box-shadow: 0 0 5px rgba(255, 110, 129, 0.5); /* Soft pink glow on focus */
+}
+
+button {
+    font-family: 'Kaushan Script', cursive; /* Custom font for button */
+    text-transform: uppercase; /* Uppercase text */
+    outline: none; /* Remove outline */
+    background: #ff6f81; /* Button color */
+    width: 100%; /* Full width for button */
+    border: none; /* No border */
+    padding: 15px; /* Padding for button */
+    color: white; /* Button text color */
+    font-size: 16px; /* Larger font size */
+    cursor: pointer; /* Pointer on hover */
+    border-radius: 15px; /* Rounded button */
+    transition: background 0.3s, transform 0.2s; /* Smooth transition */
+}
+
+button:hover {
+    background: #ff4d6b; /* Darker pink on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.text-danger {
+    font-size: 14px; /* Font size for error messages */
+    color: #d5006d; /* Dark pink for error messages */
+    margin-top: 5px; /* Spacing above error messages */
+}
+
+.message {
+    margin-top: 15px; /* Spacing above messages */
+    font-size: 17px; /* Font size for messages */
+    color: #c0c4b5; /* Light color for message text */
+}
+
+.message a {
+    color: #d5006d; /* Link color */
+    text-decoration: none; /* No underline */
+}
+
+.message a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+textarea {
+    height: 100px;
+}
