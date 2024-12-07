@@ -61,8 +61,15 @@ def search_results(request):
     profiles = Profile.objects.filter(
         Q(user__username__icontains=query) | Q(user__email__icontains=query)
     )  # Search profiles by username or email
-    for post in posts:
-        post.has_liked = post.like_set.filter(user=request.user).exists()
+    if request.user.is_authenticated:
+        # Preload liked and bookmarked post IDs
+        liked_post_ids = Like.objects.filter(user=request.user).values_list('to_post_id', flat=True)
+        bookmarked_post_ids = Bookmark.objects.filter(user=request.user).values_list('post_id', flat=True)
+
+        # Annotate posts with 'has_liked' and 'has_bookmarked'
+        for post in posts:
+            post.has_liked = post.id in liked_post_ids
+            post.has_bookmarked = post.id in bookmarked_post_ids
     # Pagination for posts
     post_paginator = Paginator(posts, 3)  # 3 posts per page
     page_number = request.GET.get('page')
