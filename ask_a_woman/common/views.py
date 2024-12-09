@@ -22,7 +22,7 @@ class HomeView(ListView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         context['comment_form'] = CommentForm()
-        # Check if the current user has liked the post
+
         if user.is_authenticated:
             for post in context['posts']:
                 post.has_liked = post.like_set.filter(user=user).exists()
@@ -31,7 +31,6 @@ class HomeView(ListView):
 
 def likes_functionality(request, pk):
     if not request.user.is_authenticated:
-        # Redirect to login page if the user is not authenticated
         return redirect('login')
 
     liked_object = Like.objects.filter(
@@ -51,32 +50,30 @@ def custom_404_view(request, exception=None):
     return render(request, '404.html', status=404)
 
 def search_results(request):
-    query = request.GET.get('q', '')  # Get the search query from the request
+    query = request.GET.get('q', '')
 
-    # Filter Posts and Profiles based on query
+
     posts = Post.objects.filter(
         Q(title__icontains=query) | Q(description__icontains=query)
-    )  # Search posts by title or description
+    )
 
     profiles = Profile.objects.filter(
         Q(user__username__icontains=query) | Q(user__email__icontains=query)
-    )  # Search profiles by username or email
+    )
     if request.user.is_authenticated:
-        # Preload liked and bookmarked post IDs
         liked_post_ids = Like.objects.filter(user=request.user).values_list('to_post_id', flat=True)
         bookmarked_post_ids = Bookmark.objects.filter(user=request.user).values_list('post_id', flat=True)
 
-        # Annotate posts with 'has_liked' and 'has_bookmarked'
         for post in posts:
             post.has_liked = post.id in liked_post_ids
             post.has_bookmarked = post.id in bookmarked_post_ids
-    # Pagination for posts
-    post_paginator = Paginator(posts, 3)  # 3 posts per page
+
+    post_paginator = Paginator(posts, 3)
     page_number = request.GET.get('page')
     posts_page = post_paginator.get_page(page_number)
 
-    # Pagination for profiles
-    profile_paginator = Paginator(profiles, 3)  # 3 profiles per page
+
+    profile_paginator = Paginator(profiles, 3)
     profile_page_number = request.GET.get('profile_page')
     profiles_page = profile_paginator.get_page(profile_page_number)
 

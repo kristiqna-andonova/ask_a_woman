@@ -10,21 +10,7 @@ class CustomUserForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ('username', 'email', 'password1', 'password2')
-        # model = get_user_model()
-        # fields = ('username', 'email', 'password1', 'password2')  # Ensure password fields are included
-        # widgets = {
-        #     'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your username'}),
-        #     'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'}),
-        #     'password1': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Create a password'}),
-        #     'password2': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm your password'}),
-        # }
-        #
-        # help_texts = {
-        #     'username': 'Letters digits and @/./+/_ only.',
-        #     'email': 'We’ll use this to send you account updates.',
-        #     'password1': 'Your password must be at least 8 characters long.',
-        #     'password2': 'Re-enter your password for confirmation.',
-        # }
+
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -47,7 +33,7 @@ class UpdateForm(UserChangeForm):
         email = self.cleaned_data.get('email')
         if email:
             User = get_user_model()
-            # Ensure this email is unique except for the current user
+
             if User.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
                 raise ValidationError("This email is already in use. Please choose a different one.")
         return email
@@ -104,5 +90,5 @@ class CustomPasswordChangeForm(PasswordChangeForm):
 
     def __init__(self, *args, **kwargs):
         super(CustomPasswordChangeForm, self).__init__(*args, **kwargs)
-        # Customize form field attributes if needed
+
 

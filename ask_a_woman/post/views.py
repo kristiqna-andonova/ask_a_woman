@@ -12,12 +12,10 @@ from ask_a_woman.post.forms import CreatePostForm, DeletePost, EditPostForm
 from ask_a_woman.post.models import Post
 
 
-# Create your views here.
-
 
 class CreatePostView(LoginRequiredMixin, CreateView):
-    login_url = reverse_lazy('login')  # Specify the login URL if not already set in settings
-    redirect_field_name = 'redirect_to'  # Optional: specify redirect field
+    login_url = reverse_lazy('login')
+    redirect_field_name = 'redirect_to'
     success_url = reverse_lazy('home')
     template_name = 'posts/create-form.html'
     form_class = CreatePostForm
@@ -35,54 +33,48 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        post = self.object  # This is the current post being viewed
+        post = self.object
         user = self.request.user
 
-        # Check if the user is authenticated and set the 'has_liked' attribute
         if user.is_authenticated:
             post.has_liked = post.like_set.filter(user=user).exists()
             post.has_bookmarked = Bookmark.objects.filter(user=user, post=post).exists()
 
-        # Fetch comments for this post
         comments = Comment.objects.filter(to_post=post).order_by('-date_time_of_publication')
 
         context.update({
-            'show_delete_icon': self.request.user == post.author,  # Show delete icon only for the post author
-            'show_edit_icon': self.request.user == post.author,  # Show edit icon only for the post author
+            'show_delete_icon': self.request.user == post.author,
+            'show_edit_icon': self.request.user == post.author,
             'comments': comments,
-            'comment_form': CommentForm(),  # Provide the empty comment form for new comments
+            'comment_form': CommentForm(),
         })
 
         return context
 def bookmark_functionality(request, pk):
     if not request.user.is_authenticated:
-        # Redirect to login page if the user is not authenticated
         return redirect('login')
     post = get_object_or_404(Post, pk=pk)
 
-    # Check if the post is already bookmarked by the user
     bookmark, created = Bookmark.objects.get_or_create(user=request.user, post=post)
 
-    if not created:  # If it's already bookmarked, remove it (unbookmark)
+    if not created:
         bookmark.delete()
 
     return redirect(request.META.get('HTTP_REFERER'))
 
 def comment_functionality(request, pk):
     if not request.user.is_authenticated:
-        # Redirect to login page if the user is not authenticated
         return redirect('login')
-    if request.method == 'POST':  # Only allow POST requests
+    if request.method == 'POST':
         post = get_object_or_404(Post, pk=pk)
         comment_form = CommentForm(request.POST)
 
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
-            comment.to_post = post  # Link the comment to the current post
-            comment.user = request.user  # Set the user as the current logged-in user
+            comment.to_post = post
+            comment.user = request.user
             comment.save()
 
-        # After saving the comment, redirect back to the same post detail page
         return redirect(request.META.get('HTTP_REFERER') + f'#{post.id}')
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
@@ -93,9 +85,8 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
         referer = self.request.META.get('HTTP_REFERER', '')
         post_details_url = reverse('post-details', kwargs={'pk': self.object.pk})
-        home_url = reverse('home')  # Replace 'home-page' with your home view's URL name
+        home_url = reverse('home')
 
-        # If the referer contains 'post-details', return there; otherwise, go to home
         if 'post-details' in referer:
             return post_details_url
         else:
@@ -114,35 +105,17 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
         return context
 
 
-# class DeleteComment(DeleteView):
-#     model = Comment
-#
-#     def get_success_url(self):
-#         referer = self.request.META.get('HTTP_REFERER', '')
-#         post_details_url = reverse('post-details', kwargs={'pk': self.object.pk})
-#         home_url = reverse('home')  # Replace 'home-page' with your home view's URL name
-#
-#         # If the referer contains 'post-details', return there; otherwise, go to home
-#         if 'post-details' in referer:
-#             return post_details_url
-#         else:
-#             return home_url
-
-
 class EditPostView(UpdateView):
     model = Post
     form_class = EditPostForm
     template_name = 'posts/edit-post.html'
 
     def get_success_url(self):
-        # Get the 'next' parameter from the form data
         next_url = self.request.POST.get('next')
 
-        # If the 'next' parameter exists, redirect to that URL
         if next_url:
             return next_url
 
-        # Fallback: If 'next' is not provided, redirect to the home page
         return reverse('home')  # Replace
 
     def get_context_data(self, **kwargs):
@@ -153,20 +126,17 @@ class EditPostView(UpdateView):
 
 class FilteredPostsView(ListView):
     model = Post
-    template_name = 'posts/filtered_posts.html'  # New template for filtered posts
+    template_name = 'posts/filtered_posts.html'
     context_object_name = 'posts'
-    paginate_by = 3  # No pagination, to allow infinite scroll
+    paginate_by = 3
 
     def get_queryset(self):
 
-        # Get the 'type' parameter from the URL (if available)
         post_type = self.kwargs.get('type', None)
 
         if post_type:
-            # Filter the posts based on the type from the URL
             return Post.objects.filter(type=post_type).order_by('-created_at')
 
-        # If no 'type' parameter, return all posts
         return Post.objects.all().order_by('-created_at')
 
     def get_context_data(self, **kwargs):
@@ -174,7 +144,7 @@ class FilteredPostsView(ListView):
         user = self.request.user
         context['comment_form'] = CommentForm()
 
-        # Check if the current user has liked the post
+
         if user.is_authenticated:
             for post in context['posts']:
                 post.has_liked = post.like_set.filter(user=user).exists()
@@ -186,14 +156,13 @@ class FilteredPostsView(ListView):
 
 class DeleteCommentView(LoginRequiredMixin, View):
     def get(self, request, pk, comment_id):
-        # Fetch the post and the comment
+
         post = get_object_or_404(Post, id=pk)
         comment = get_object_or_404(Comment, id=comment_id)
 
-        # Check if the user is authorized to delete the comment
         if request.user == comment.user or request.user == post.author:
             comment.delete()
             return redirect('post-details', pk=post.id)
         else:
-            # If not authorized, return a forbidden response
+
             return HttpResponseForbidden("You are not allowed to delete this comment.")
