@@ -32,12 +32,10 @@ def check_valid_size(value):
 def validate_and_crop_image(image):
     max_width, max_height = 480, 480  # Desired dimensions
 
-    # Check if the uploaded image is from Cloudinary
+
     if hasattr(image, 'build_url'):
-        # This is a CloudinaryResource. Cloudinary handles transformations directly.
         return
 
-    # For local or in-memory files (during testing)
     try:
         from PIL import Image, ImageOps
         from io import BytesIO
