@@ -20,7 +20,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from ask_a_woman.common import views
-from ask_a_woman.common.views import custom_404_view
+from ask_a_woman.common.views import custom_404_view, custom_403_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,3 +31,4 @@ urlpatterns = [
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler404 = custom_404_view
+handler403 = custom_403_view
