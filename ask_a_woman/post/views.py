@@ -77,7 +77,7 @@ def comment_functionality(request, pk):
 
         return redirect(request.META.get('HTTP_REFERER') + f'#{post.id}')
 
-class PostDeleteView(LoginRequiredMixin, DeleteView, UserPassesTestMixin):
+class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
     model = Post
     form_class = DeletePost
     template_name = 'posts/delete-post.html'
@@ -114,7 +114,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView, UserPassesTestMixin):
         return render(self.request, '403.html', status=403)
 
 
-class EditPostView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
+class EditPostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     form_class = EditPostForm
     template_name = 'posts/edit-post.html'
@@ -122,23 +122,21 @@ class EditPostView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
 
     def get_success_url(self):
         next_url = self.request.POST.get('next')
-
-        if next_url:
-            return next_url
-
-        return reverse('home')  # Replace
+        return next_url if next_url else reverse('home')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['profile'] = get_object_or_404(Profile, user=self.request.user)
         return context
 
-    def handle_no_permission(self):
-        return render(self.request, '403.html', status=403)
-
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author
+
+    def handle_no_permission(self):
+        return render(self.request, '403.html', status=403)
+
+
 
 
 class FilteredPostsView(ListView):
