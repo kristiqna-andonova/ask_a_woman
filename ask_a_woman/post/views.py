@@ -81,11 +81,13 @@ class PostDeleteView(LoginRequiredMixin, DeleteView, UserPassesTestMixin):
     model = Post
     form_class = DeletePost
     template_name = 'posts/delete-post.html'
+    raise_exception = True
 
     def get_success_url(self):
         referer = self.request.META.get('HTTP_REFERER', '')
         post_details_url = reverse('post-details', kwargs={'pk': self.object.pk})
         home_url = reverse('home')
+
 
         if 'post-details' in referer:
             return post_details_url
@@ -108,11 +110,15 @@ class PostDeleteView(LoginRequiredMixin, DeleteView, UserPassesTestMixin):
         post = self.get_object()
         return self.request.user == post.author
 
+    def handle_no_permission(self):
+        return render(self.request, '403.html', status=403)
+
 
 class EditPostView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
     model = Post
     form_class = EditPostForm
     template_name = 'posts/edit-post.html'
+    raise_exception = True
 
     def get_success_url(self):
         next_url = self.request.POST.get('next')
@@ -129,6 +135,10 @@ class EditPostView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
 
     def handle_no_permission(self):
         return render(self.request, '403.html', status=403)
+
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
 
 
 class FilteredPostsView(ListView):
