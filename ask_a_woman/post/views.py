@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
@@ -77,7 +77,7 @@ def comment_functionality(request, pk):
 
         return redirect(request.META.get('HTTP_REFERER') + f'#{post.id}')
 
-class PostDeleteView(LoginRequiredMixin, DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView, UserPassesTestMixin):
     model = Post
     form_class = DeletePost
     template_name = 'posts/delete-post.html'
@@ -104,8 +104,12 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
         return context
 
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
 
-class EditPostView(UpdateView):
+
+class EditPostView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
     model = Post
     form_class = EditPostForm
     template_name = 'posts/edit-post.html'
@@ -122,6 +126,10 @@ class EditPostView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['profile'] = get_object_or_404(Profile, user=self.request.user)
         return context
+
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
 
 
 class FilteredPostsView(ListView):

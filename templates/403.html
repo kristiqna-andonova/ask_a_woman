@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="error-page">
+    <div class="error-message">
+        <img src="{% static "images/img_2.png" %}" alt="">
+        <h1>Oops! Forbidden</h1>
+        <p>Sorry, you cant do that.</p>
+        <a href="/" class="go-home-btn">Go to Home</a>
+    </div>
+</div>
+{% endblock %}
