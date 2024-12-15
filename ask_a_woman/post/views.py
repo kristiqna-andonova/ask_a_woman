@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseForbidden
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, DetailView, DeleteView, UpdateView, ListView
@@ -127,9 +127,8 @@ class EditPostView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
         context['profile'] = get_object_or_404(Profile, user=self.request.user)
         return context
 
-    def test_func(self):
-        post = self.get_object()
-        return self.request.user == post.author
+    def handle_no_permission(self):
+        return render(self.request, '403.html', status=403)
 
 
 class FilteredPostsView(ListView):
